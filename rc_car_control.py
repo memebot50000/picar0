@@ -64,8 +64,6 @@ while True:
                 left(tlst[i])
             elif klst[i] == 'd':
                 right(tlst[i])
-                else:
-                    stop()
             elif klst[i] == "t":
                 test()
             elif klst[i] == 'q':

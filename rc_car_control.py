@@ -60,7 +60,7 @@ while True:
                 move_forward(tlst[i], plst[i])
             elif klst[i] == 'a':
                 turn_left(tlst[i], plst[i])
-            elif klst[i[ == 's':
+            elif klst[i] == 's':
                 move_backward(tlst[i], plst[i])
             elif klst[i] == 'd':
                 turn_right(tlst[i], plst[i])

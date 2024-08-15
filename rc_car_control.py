@@ -9,61 +9,61 @@ def stop():
     left_motor.stop()
     right_motor.stop()
 
-def forward(t):
-    '''drives car forward for t seconds'''
-    left_motor.forward()
-    right_motor.forward()
+def move_forward(t, power):
+    '''drives car forward for t seconds at specified power percentage'''
+    left_motor.forward(power)
+    right_motor.backward(power)
     time.sleep(t)
     stop()
 
-def backward(t):
-    '''drives car backward for t seconds'''
-    left_motor.backward()
-    right_motor.backward()
+def move_backward(t, power):
+    '''drives car backward for t seconds at specified power percentage'''
+    left_motor.backward(power)
+    right_motor.forward(power)
     time.sleep(t)
     stop()
 
-def left(t):
-    '''turns car left for t seconds'''
-    left_motor.forward()
-    right_motor.backward()
+def turn_left(t, power):
+    '''turns car left for t seconds at specified power percentage'''
+    left_motor.backward(power)
+    right_motor.backward(power)
     time.sleep(t)
     stop()
 
-def right(t):
-    '''turns car right for t seconds'''
-    left_motor.backward()
-    right_motor.forward()
+def turn_right(t, power):
+    '''turns car right for t seconds at specified power percentage'''
+    left_motor.forward(power)
+    right_motor.forward(power)
     time.sleep(t)
     stop()
 
 def test():
-    forward(0.5)
-    backward(0.5)
-    left(0.5)
-    right(0.5)
+    move_forward(0.5, 1.0)
+    turn_left(0.5, 1.0)
+    turn_right(0.5, 1.0)
     stop()
     print("test completed")
 
-print("RC Car Control Ready. Enter W,A,S,D to control. Enter corresponding times after commands. Enter Q to quit. Enter T to test. Remember to put spaces between commands/times or the code will break.")
+print("RC Car Control Ready. Enter W,A,S,D to control. Enter corresponding times and power percentages after commands. Enter Q to quit. Enter T to test. Remember to put spaces between commands/times/power or the code will break.")
 
 while True:
     kcmds = input("Enter command(s): ").lower()
     tcmds = input("Enter time(s): ")
+    pcmds = input("Enter power percentage(s) (0-100): ")
     klst = kcmds.split()
-    tlst = tcmds.split()
-    tlst = [float(t) for t in tlst]  # Convert times to float
+    tlst = [float(t) for t in tcmds.split()]
+    plst = [float(p) / 100.0 for p in pcmds.split()]  # Convert power to a scale of 0 to 1
     
     try:
         for i in range(len(klst)):
             if klst[i] == 'w':
-                forward(tlst[i])
-            elif klst[i] == 's':
-                backward(tlst[i])
+                move_forward(tlst[i], plst[i])
             elif klst[i] == 'a':
-                left(tlst[i])
+                move_backward(tlst[i], plst[i])
+            elif klst[i] == 's':
+                turn_left(tlst[i], plst[i])
             elif klst[i] == 'd':
-                right(tlst[i])
+                turn_right(tlst[i], plst[i])
             elif klst[i] == "t":
                 test()
             elif klst[i] == 'q':
@@ -73,9 +73,9 @@ while True:
             else:
                 stop()
     except IndexError:
-        print("Error: Number of commands and times do not match.")
+        print("Error: Number of commands, times, and power percentages do not match.")
     except ValueError:
-        print("Error: Invalid time input. Please enter numeric values for times.")
+        print("Error: Invalid input. Please enter numeric values for times and power percentages.")
     except Exception as e:
         print(f"An error occurred: {str(e)}")
     

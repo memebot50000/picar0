@@ -11,15 +11,15 @@ def stop():
 
 def move_forward(t, power):
     '''drives car forward for t seconds at specified power percentage'''
-    left_motor.forward(power)
+    left_motor.backward(power)
     right_motor.backward(power)
     time.sleep(t)
     stop()
 
 def move_backward(t, power):
     '''drives car backward for t seconds at specified power percentage'''
-    left_motor.backward(power)
-    right_motor.forward(power)
+    left_motor.forward(power)
+    right_motor.backward(power)
     time.sleep(t)
     stop()
 

@@ -65,7 +65,7 @@ while True:
             elif klst[i] == 'd':
                 turn_right(tlst[i], plst[i])
             elif klst[i] == "t":
-                test()
+                test(tlst[i], plst[i])
             elif klst[i] == 'q':
                 stop()
                 print("RC Car Control stopped.")

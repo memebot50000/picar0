@@ -18,7 +18,7 @@ def move_forward(t, power):
 def move_backward(t, power):
     '''drives car backward for t seconds at specified power percentage'''
     left_motor.backward(power)
-    right_motor.backward(power)
+    right_motor.forward(power)
     time.sleep(t)
     stop()
 

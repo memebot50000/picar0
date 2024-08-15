@@ -15,6 +15,13 @@ def move_forward(t, power):
     time.sleep(t)
     stop()
 
+def move_backward(t, power):
+    '''drives car forward for t seconds at specified power percentage'''
+    left_motor.backward(power)
+    right_motor.forward(power)
+    time.sleep(t)
+    stop()
+
 def turn_left(t, power):
     '''turns car left for t seconds at specified power percentage'''
     left_motor.backward(power)
@@ -29,10 +36,11 @@ def turn_right(t, power):
     time.sleep(t)
     stop()
 
-def test():
-    move_forward(0.5, 1.0)
-    turn_left(0.5, 1.0)
-    turn_right(0.5, 1.0)
+def test(t, power):
+    move_forward(t, power)
+    move_backward(t, power)
+    turn_left(t, power)
+    turn_right(t, power)
     stop()
     print("test completed")
 
@@ -51,6 +59,8 @@ while True:
             if klst[i] == 'w':
                 move_forward(tlst[i], plst[i])
             elif klst[i] == 'a':
+                turn_left(tlst[i], plst[i])
+            elif klst[i[ == 's':
                 move_backward(tlst[i], plst[i])
             elif klst[i] == 'd':
                 turn_right(tlst[i], plst[i])

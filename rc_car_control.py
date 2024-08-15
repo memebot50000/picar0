@@ -15,13 +15,6 @@ def move_forward(t, power):
     time.sleep(t)
     stop()
 
-def move_backward(t, power):
-    '''drives car backward for t seconds at specified power percentage'''
-    left_motor.backward(power)
-    right_motor.forward(power)
-    time.sleep(t)
-    stop()
-
 def turn_left(t, power):
     '''turns car left for t seconds at specified power percentage'''
     left_motor.backward(power)
@@ -43,7 +36,7 @@ def test():
     stop()
     print("test completed")
 
-print("RC Car Control Ready. Enter W,A,S,D to control. Enter corresponding times and power percentages after commands. Enter Q to quit. Enter T to test. Remember to put spaces between commands/times/power or the code will break.")
+print("RC Car Control Ready. Enter W,A,D to control. Enter corresponding times and power percentages after commands. Enter Q to quit. Enter T to test. Remember to put spaces between commands/times/power or the code will break.")
 
 while True:
     kcmds = input("Enter command(s): ").lower()
@@ -59,8 +52,6 @@ while True:
                 move_forward(tlst[i], plst[i])
             elif klst[i] == 'a':
                 move_backward(tlst[i], plst[i])
-            elif klst[i] == 's':
-                turn_left(tlst[i], plst[i])
             elif klst[i] == 'd':
                 turn_right(tlst[i], plst[i])
             elif klst[i] == "t":
